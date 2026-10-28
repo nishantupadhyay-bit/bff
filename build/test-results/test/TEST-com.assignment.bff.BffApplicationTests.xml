@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.assignment.bff.BffApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-10-21T19:30:24.712Z" hostname="FLKFFQTWGH.local" time="0.96">
+  <properties/>
+  <testcase name="contextLoads()" classname="com.assignment.bff.BffApplicationTests" time="0.32"/>
+  <system-out><![CDATA[01:00:24.774 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.assignment.bff.BffApplicationTests]: BffApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+01:00:24.814 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.assignment.bff.BffApplication for test class com.assignment.bff.BffApplicationTests
+01:00:24.848 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.assignment.bff.BffApplicationTests]: BffApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+01:00:24.849 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.assignment.bff.BffApplication for test class com.assignment.bff.BffApplicationTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.1)
+
+2026-10-22T01:00:24.963+05:30  INFO 92174 --- [bff] [    Test worker] com.assignment.bff.BffApplicationTests   : Starting BffApplicationTests using Java 17.0.20.1 with PID 92174 (started by nishantupadhyay in /Users/nishantupadhyay/Desktop/bff)
+2026-10-22T01:00:24.964+05:30  INFO 92174 --- [bff] [    Test worker] com.assignment.bff.BffApplicationTests   : No active profile set, falling back to 1 default profile: "default"
+2026-10-22T01:00:25.345+05:30  INFO 92174 --- [bff] [    Test worker] com.assignment.bff.BffApplicationTests   : Started BffApplicationTests in 0.47 seconds (process running for 1.013)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
