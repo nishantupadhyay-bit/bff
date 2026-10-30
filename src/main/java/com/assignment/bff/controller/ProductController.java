@@ -8,6 +8,8 @@ import com.assignment.protos.product.v1.ListProductsRequest;
 import com.assignment.protos.product.v1.ListProductsResponse;
 import com.assignment.protos.product.v1.ProductServiceGrpc;
 import com.google.protobuf.Timestamp;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +23,9 @@ import java.util.List;
 @RequestMapping("/api/products")
 public class ProductController {
 
+    private static final Logger logger =
+            LoggerFactory.getLogger(ProductController.class);
+
     private final ProductServiceGrpc.ProductServiceBlockingStub productServiceStub;
 
     public ProductController(
@@ -31,7 +36,7 @@ public class ProductController {
     @PostMapping
     public ResponseEntity<ProductResponse> createProduct(
             @RequestBody CreateProductRequest request) {
-
+        logger.info("grpc request start creating {}", request.toString());
         var grpcRequest =
                 com.assignment.protos.product.v1.CreateProductRequest.newBuilder()
                         .setName(request.name())

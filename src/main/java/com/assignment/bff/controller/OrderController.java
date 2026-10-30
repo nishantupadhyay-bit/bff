@@ -1,12 +1,16 @@
+
 package com.assignment.bff.controller;
 
 import com.assignment.bff.dto.CreateOrderRequest;
 import com.assignment.bff.dto.OrderResponse;
+import com.assignment.bff.service.OrderProcessingService;
 import com.assignment.protos.order.v1.GetOrderRequest;
 import com.assignment.protos.order.v1.ListOrdersRequest;
 import com.assignment.protos.order.v1.ListOrdersResponse;
 import com.assignment.protos.order.v1.OrderServiceGrpc;
 import com.google.protobuf.Timestamp;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,25 +23,27 @@ import java.util.List;
 @RequestMapping("/api/orders")
 public class OrderController {
 
+    private static final Logger logger =
+            LoggerFactory.getLogger(OrderController.class);
+
     private final OrderServiceGrpc.OrderServiceBlockingStub orderServiceStub;
+    private final OrderProcessingService orderProcessingService;
 
     public OrderController(
-            OrderServiceGrpc.OrderServiceBlockingStub orderServiceStub) {
+            OrderServiceGrpc.OrderServiceBlockingStub orderServiceStub,
+            OrderProcessingService orderProcessingService) {
+
         this.orderServiceStub = orderServiceStub;
+        this.orderProcessingService = orderProcessingService;
     }
 
     @PostMapping
     public ResponseEntity<OrderResponse> createOrder(
             @RequestBody CreateOrderRequest request) {
 
-        var grpcRequest =
-                com.assignment.protos.order.v1.CreateOrderRequest.newBuilder()
-                        .setUserId(request.userId())
-                        .setProductId(request.productId())
-                        .setQuantity(request.quantity())
-                        .build();
+        logger.info("Order creation started");
 
-        var grpcResponse = orderServiceStub.createOrder(grpcRequest);
+        var grpcResponse = orderProcessingService.createOrder(request);
 
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(toOrderResponse(grpcResponse));
@@ -58,6 +64,7 @@ public class OrderController {
 
     @GetMapping
     public ResponseEntity<List<OrderResponse>> getAllOrders() {
+
         ListOrdersResponse grpcResponse = orderServiceStub.listOrders(
                 ListOrdersRequest.newBuilder().build());
 
@@ -84,6 +91,7 @@ public class OrderController {
     }
 
     private LocalDateTime toLocalDateTime(Timestamp timestamp) {
+
         return LocalDateTime.ofEpochSecond(
                 timestamp.getSeconds(),
                 timestamp.getNanos(),
